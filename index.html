@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Scheduler AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Meeting Scheduler</h1>
+            <p>Intelligent scheduling made simple</p>
+        </div>
+
+        <div class="main-content-area">
+            <div class="left-column">
+                <form class="form-section">
+                    <div class="form-group">
+                        <label for="requestId">Request ID</label>
+                        <input type="text" id="requestId" class="readonly" readonly placeholder="Auto-generated UUID">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="datetimeInput">Request Datetime</label>
+                        <input type="text" id="datetimeInput" class="readonly" readonly placeholder="Current timestamp">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="locationInput">Location</label>
+                        <input type="text" id="locationInput" value="IISc Bangalore" placeholder="Meeting location">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fromEmail">From (Sender Email)</label>
+                        <input type="email" id="fromEmail" value="userone.amd@gmail.com" placeholder="your.email@domain.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attendeesInput">Attendees</label>
+                        <input type="text" id="attendeesInput" value="usertwo.amd@gmail.com, userthree.amd@gmail.com" placeholder="email1@domain.com, email2@domain.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subjectInput">Subject</label>
+                        <input type="text" id="subjectInput" value="Agentic AI Project Status Update" placeholder="Meeting subject">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailContentInput">Message</label>
+                        <textarea id="emailContentInput" placeholder="Enter meeting details...">Hi team, let's meet on Thursday for 30 minutes to discuss the status of Agentic AI Project.</textarea>
+                    </div>
+
+                    <button type="button" class="schedule-button" id="scheduleButton">
+                        <span class="button-text">Schedule Meeting</span>
+                    </button>
+                </form>
+
+                <div class="result-section">
+                    <div class="result-header">
+                        <h2>Result JSON Preview</h2>
+                        <div class="status-indicator" id="statusIndicator"></div>
+                        <span id="responseTime" class="response-time-display"></span>
+                    </div>
+                    <div class="result-content-preview" id="resultJsonPreview">Click "Schedule Meeting" to begin...</div>
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="meeting-cards-section">
+                    <h2>Scheduled Meeting Details</h2>
+                    <div id="meetingCardsContainer" class="meeting-cards-container">
+                        <p class="no-meeting-message">No meeting scheduled yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="jsonModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalButton">&times;</span>
+            <div class="modal-header">
+                <h2>Full API Response</h2>
+                <span id="modalResponseTime" class="response-time-display"></span>
+            </div>
+            <pre id="modalResultJson" class="modal-json-output"></pre>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+/* General Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh; /* Make body take full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #2d3748;
+    line-height: 1.5;
+}
+
+/* Container */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 30px; /* Reduced padding */
+    width: 100%;
+    max-width: 1200px; /* Increased max-width for side-by-side content */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex; /* Use flex to stack header then main content */
+    flex-direction: column;
+    min-height: 90vh; /* Make container try to fit screen height */
+    max-height: 98vh; /* Prevents overflow of container itself */
+    overflow: hidden; /* Hide scrollbars on container itself */
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 25px; /* Slightly reduced margin */
+}
+
+.header h1 {
+    font-size: 2.2rem; /* Slightly smaller font */
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #718096;
+    font-size: 1rem; /* Slightly smaller font */
+    font-weight: 400;
+}
+
+/* Main Content Area (for side-by-side columns) */
+.main-content-area {
+    display: flex; /* Flexbox for horizontal columns */
+    gap: 30px; /* Gap between the two main columns */
+    flex-grow: 1; /* Allow this area to expand and take available vertical space */
+    min-height: 0; /* Essential for flex items with overflow */
+    overflow: hidden; /* Hide main-content-area scrollbars */
+}
+
+/* Left Column: Form and JSON Result */
+.left-column {
+    flex: 1.2; /* Takes slightly more width for the form */
+    display: flex;
+    flex-direction: column; /* Stack form and result vertically */
+    gap: 20px; /* Gap between form and result */
+    min-height: 0; /* Essential for flex items with overflow */
+}
+
+/* Form Section */
+.form-section {
+    flex: 0 0 auto; /* Don't grow, don't shrink, size based on content */
+    padding-right: 5px; /* Small padding for potential scrollbar in result section */
+    overflow-y: auto; /* Allow the form to scroll if it gets too long */
+    max-height: 55vh; /* Max height for the form itself */
+}
+
+/* Form Groups & Inputs */
+.form-group {
+    margin-bottom: 18px; /* Slightly reduced margin */
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 6px; /* Slightly reduced margin */
+    font-size: 0.9rem; /* Slightly smaller font */
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px; /* Reduced padding for smaller inputs */
+    border: 2px solid #e2e8f0;
+    border-radius: 10px; /* Slightly smaller border-radius */
+    font-size: 0.95rem; /* Smaller font for inputs */
+    transition: all 0.3s ease;
+    background: #f8fafc;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 90px; /* Reduced min-height for textarea */
+    font-family: inherit;
+}
+
+.readonly {
+    background: #f1f5f9 !important;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+/* Schedule Button */
+.schedule-button {
+    width: 100%;
+    padding: 14px 20px; /* Reduced padding for smaller button */
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 10px; /* Slightly smaller border-radius */
+    font-size: 1rem; /* Slightly smaller font */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px; /* Reduced margin */
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3); /* Slightly smaller shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Reduced gap */
+}
+
+.schedule-button:hover {
+    transform: translateY(-2px); /* Reduced hover transform */
+    box-shadow: 0 12px 28px rgba(102, 126, 234, 0.4); /* Reduced hover shadow */
+}
+
+.schedule-button:active {
+    transform: translateY(-1px);
+}
+
+.schedule-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Loading Dots Animation */
+.loading-dots {
+    display: inline-block;
+    position: relative;
+    width: 18px; /* Smaller dots container */
+    height: 18px;
+}
+
+.loading-dots div {
+    position: absolute;
+    top: 7px; /* Adjust vertical position */
+    width: 3px; /* Smaller dots */
+    height: 3px;
+    border-radius: 50%;
+    background: #fff;
+    animation: loading 1.2s linear infinite;
+}
+
+.loading-dots div:nth-child(1) { left: 1px; animation-delay: 0s; } /* Adjust horizontal position */
+.loading-dots div:nth-child(2) { left: 7px; animation-delay: -0.4s; }
+.loading-dots div:nth-child(3) { left: 13px; animation-delay: -0.8s; }
+
+
+/* Result Section (JSON Output) */
+.result-section {
+    flex-grow: 1; /* Allow result section to take remaining vertical space */
+    display: flex;
+    flex-direction: column; /* Stack header and content vertically */
+    padding-top: 20px; /* Space from form */
+    margin-top: 10px; /* Added margin */
+    border-top: 1px solid #e2e8f0; /* Border above result section */
+}
+
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Reduced gap */
+    margin-bottom: 15px; /* Reduced margin */
+}
+
+.result-header h2 {
+    font-size: 1.3rem; /* Slightly smaller font */
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.status-indicator {
+    width: 10px; /* Smaller indicator */
+    height: 10px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.response-time-display {
+    font-size: 0.85rem; /* Smaller font */
+    color: #718096;
+    margin-left: auto;
+}
+
+/* JSON Preview area */
+.result-content-preview {
+    flex-grow: 1; /* Allow content to fill available space */
+    background: #1a202c;
+    border-radius: 10px; /* Slightly smaller border-radius */
+    padding: 15px; /* Reduced padding */
+    color: #e2e8f0;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-size: 0.85rem; /* Smaller font */
+    line-height: 1.5; /* Slightly tighter line height */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-y: auto; /* Internal scroll for JSON preview */
+    min-height: 80px; /* Minimum height for result display */
+    border: 1px solid #2d3748;
+    cursor: pointer; /* Indicate it's clickable */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    user-select: none; /* Prevent text selection on click */
+}
+
+.result-content-preview:hover {
+    background-color: #2a2f3c; /* Darker on hover */
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15); /* Subtle border highlight */
+}
+
+
+/* Right Column: Meeting Cards */
+.right-column {
+    flex: 1; /* Take up equal space, can be less than left */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    min-height: 0; /* Essential for flex items with overflow */
+}
+
+.meeting-cards-section {
+    flex-grow: 1; /* Allow meeting cards section to grow */
+    display: flex;
+    flex-direction: column; /* Stack header and container */
+    padding-top: 0;
+    border-top: none; /* No border-top for this section in the grid layout */
+}
+.meeting-cards-section h2 {
+    font-size: 1.3rem; /* Match result section header */
+    margin-bottom: 15px; /* Reduced margin */
+}
+
+.meeting-cards-container {
+    flex-grow: 1; /* Allow cards container to grow and scroll */
+    max-height: unset; /* Remove fixed max-height, parent handles it */
+    overflow-y: auto; /* Allow cards to scroll internally */
+    padding-right: 5px; /* Add padding for scrollbar */
+}
+
+.meeting-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px; /* Slightly smaller border-radius */
+    padding: 15px; /* Reduced padding */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04); /* Reduced shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 15px; /* Spacing between cards */
+}
+
+.meeting-card:last-child {
+    margin-bottom: 0; /* No margin after the last card */
+}
+
+.meeting-card h3 {
+    font-size: 1.1rem; /* Slightly smaller font */
+    color: #007bff;
+    margin-bottom: 8px; /* Reduced margin */
+}
+
+.meeting-card p {
+    font-size: 0.9rem; /* Smaller font */
+    color: #4a5568;
+    margin-bottom: 4px; /* Reduced margin */
+}
+
+.meeting-card .attendee-list {
+    font-size: 0.8rem; /* Smaller font */
+    color: #718096;
+    margin-top: 6px; /* Reduced margin */
+    word-break: break-all;
+}
+
+.meeting-card .label {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.no-meeting-message {
+    text-align: center;
+    color: #718096;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Error Message */
+.error-message {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 12px; /* Reduced padding */
+    border-radius: 10px; /* Slightly smaller border-radius */
+    margin-top: 15px; /* Reduced margin */
+    font-weight: 500;
+    font-size: 0.9rem; /* Smaller font */
+}
+
+
+/* --- Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    opacity: 0; /* Start invisible for animation */
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Allows clicks to pass through when hidden */
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto; /* Re-enable pointer events when active */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    width: 90%; /* Responsive width */
+    max-width: 700px; /* Max width for larger screens */
+    max-height: 90vh; /* Max height for modal content */
+    overflow-y: auto; /* Enable scrolling within the modal content */
+    transform: translateY(20px); /* Start slightly off for animation */
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0); /* Slide into place */
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+    font-size: 1.6rem;
+    color: #0056b3;
+}
+
+.modal-json-output {
+    background-color: #1a202c;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: calc(90vh - 150px); /* Adjust height to fit within modal */
+    overflow-y: auto;
+    border: 1px solid #2d3748;
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 900px) { /* Stacks columns vertically on screens <= 900px */
+    .container {
+        min-height: unset; /* Allow container to grow if content is stacked */
+        max-height: unset; /* Remove max-height for stacking */
+        overflow: visible; /* Allow container to scroll if content too tall */
+    }
+    .main-content-area {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 25px; /* Gap between stacked columns */
+    }
+    .left-column, .right-column {
+        min-height: unset;
+        flex: unset; /* Remove flex sizing */
+    }
+    .form-section, .result-section, .meeting-cards-section {
+        max-height: unset; /* Remove max-height constraints for individual sections when stacked */
+        overflow-y: visible; /* Make them visible, let main container handle scroll if needed */
+        padding-right: 0; /* Remove scrollbar padding */
+    }
+    /* Apply a maximum height to the scrollable content areas when stacked */
+    .result-content-preview, .meeting-cards-container {
+        max-height: 250px; /* Apply a max height for internal scrolling on smaller screens */
+    }
+    .modal-content {
+        width: 95%; /* Wider on small screens */
+        padding: 20px;
+    }
+    .modal-json-output {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 600px) { /* Further adjustments for very small screens */
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    .schedule-button {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    .form-group input,
+    .form-group textarea {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+    .result-content-preview, .meeting-card p {
+        font-size: 0.8rem;
+    }
+}
